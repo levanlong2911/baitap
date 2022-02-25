@@ -16,33 +16,61 @@
         }
         if(isset($_POST['submit'])){
             $name = $_POST['name'];
-            // if($name == ''){
-            //     $errorName = '<style color="red">Vui lòng nhập name</style>';
-            // }
             $email = $_POST['email'];
             $password = md5($_POST['password']);
-            $query = "INSERT INTO user(name, email, password) VALUES ('$name', '$email', '$password')";
-            $result = $mysqli->query($query);
-            if($result){
-                header("Location: /dangky.php?msg=Đăng ký thành công");
+            
+            if($name == '' || $email == '' || $password == ''){
+                echo "<strong style='color:red'>Vui lòng nhập đầy đủ thông tin</strong>";
             }else{
-                echo 'Đã có lổi khi đăng ký';
+                $query = "INSERT INTO user(name, email, password) VALUES ('$name', '$email', '$password')";
+                $result = $mysqli->query($query);
+                header('location: dangky.php?msg=Đăng ký thành công');
             }
         }
     ?>
     <h1>Đăng ký</h1>
     <form action="" method="post">
         <div class="form-group">
-          <label for="">Họ và tên</label>
-          <input type="text" class="form-control" name="name" id="name" placeholder="Nhập họ và tên">
+            <label for="">Họ và tên</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Nhập họ và tên">
+            <p>
+            <?php
+            if(isset($_POST['submit'])){
+                $name = $_POST['name'];
+                if($name == ''){
+                    echo "<strong style='color:red'>Vui lòng nhập name</strong>";
+                }
+            }
+            ?>
+            </p>
         </div>
         <div class="form-group">
-          <label for="">Email</label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="Nhập email">
+            <label for="">Email</label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Nhập email">
+            <p>
+            <?php
+            if(isset($_POST['submit'])){
+                $email = $_POST['email'];
+                if($email == ''){
+                    echo "<strong style='color:red'>Vui lòng nhập email</strong>";
+                }
+            }
+            ?>
+            </p>
         </div>
         <div class="form-group">
-          <label for="">Password</label>
-          <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+            <label for="">Password</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+            <p>
+            <?php
+            if(isset($_POST['submit'])){
+                $password = $_POST['password'];
+                if($password == ''){
+                    echo "<strong style='color:red'>Vui lòng nhập password</strong>";
+                }
+            }
+            ?>
+            </p>
         </div>
         <button type="submit" name="submit">Đăng ký</button>
     </form>
