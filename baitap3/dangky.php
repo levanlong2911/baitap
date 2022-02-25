@@ -22,9 +22,18 @@
             if($name == '' || $email == '' || $password == ''){
                 echo "<strong style='color:red'>Vui lòng nhập đầy đủ thông tin</strong>";
             }else{
-                $query = "INSERT INTO user(name, email, password) VALUES ('$name', '$email', '$password')";
-                $result = $mysqli->query($query);
-                header('location: dangky.php?msg=Đăng ký thành công');
+                //Kiểm tra tài khoản đã tồn tại hay chưa
+                $sql = "SELECT * FROM user WHERE name = '$name' OR email = '$email'";
+                $kq = $mysqli->query($sql);
+                // Kiểm tra xem nếu trả về lớn 1 thì nghĩa là name hoặc email đã tồn tại
+                if(mysqli_num_rows($kq) > 0){
+                    echo "<strong style='color:red'>Tài khoản đã tồn tại</strong>";
+                }else{
+                    $query = "INSERT INTO user(name, email, password) VALUES ('$name', '$email', '$password')";
+                    $result = $mysqli->query($query);
+                    header('location: dangky.php?msg=Đăng ký thành công');
+                }
+                
             }
         }
     ?>
