@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/baitap/baitap3/DatabaseConnectUtil.php';
     session_start();
+    ob_start();
     if(!isset($_SESSION['email'])){
         header('location: login.php');
     }
@@ -57,3 +58,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/baitap/baitap3/DatabaseConnectUtil.ph
     
 </body>
 </html>
+<?php
+ob_end_flush();
+?>

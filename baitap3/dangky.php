@@ -1,5 +1,6 @@
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . '/baitap/baitap3/DatabaseConnectUtil.php';
+    ob_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,3 +87,6 @@
     
 </body>
 </html>
+<?php
+ ob_end_flush();
+?>
