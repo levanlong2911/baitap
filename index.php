@@ -31,10 +31,6 @@
     <a href="/bt2/bai8.php">Bài 8</a>
     <a href="/bt2/bai9.php">Bài 9</a>
     <a href="/bt2/bai10.php">Bài 10</a>
-    <h2>bài tập 3 </h2>
-    <a href="/baitap3/dangky.php">Đăng ký</a>
-    <a href="/baitap3/list.php">Danh sách</a>
-    <a href="/baitap3/login.php">Đăng nhập</a>
-    <a href="/baitap3/save.php">Lưu session</a>
+    
 </body>
 </html>
