@@ -8,7 +8,7 @@
     // Server: remotemysql.com
     
     // Port: 3306
-    $localhost = 'localhost';
+    $localhost = 'remotemysql.com';
     $username = 'rMEt9axaDn';
     $password = '70xIYdFRXw';
     $database = 'rMEt9axaDn';
