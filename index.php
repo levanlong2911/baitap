@@ -10,5 +10,32 @@
     <h1>Bài tập</h1>
     <h2>bài tập 1</h2>
     <a href="/baitap1/bai1.php">Bài 1</a>
+    <a href="/baitap1/bai2.php">Bài 2</a>
+    <a href="/baitap1/bai3.php">Bài 3</a>
+    <a href="/baitap1/bai4.php">Bài 4</a>
+    <a href="/baitap1/bai5.php">Bài 5</a>
+    <a href="/baitap1/bai6.php">Bài 6</a>
+    <a href="/baitap1/bai7.php">Bài 7</a>
+    <a href="/baitap1/bai8.php">Bài 8</a>
+    <a href="/baitap1/bai9.php">Bài 9</a>
+    <a href="/baitap1/bai10.php">Bài 10</a>
+    <a href="/baitap1/bai11.php">Bài 11</a>
+    <h2>bài tập 2 </h2>
+    <a href="/bt2/bai1.php">Bài 1</a>
+    <a href="/bt2/bai2.php">Bài 2</a>
+    <a href="/bt2/bai3.php">Bài 3</a>
+    <a href="/bt2/bai4.php">Bài 4</a>
+    <a href="/bt2/bai5.php">Bài 5</a>
+    <a href="/bt2/bai6.php">Bài 6</a>
+    <a href="/bt2/bai7.php">Bài 7</a>
+    <a href="/bt2/bai8.php">Bài 8</a>
+    <a href="/bt2/bai9.php">Bài 9</a>
+    <a href="/bt2/bai10.php">Bài 10</a>
+    <h2>bài tập 3 </h2>
+    <a href="/baitap3/dangky.php">Bài 1</a>
+    <a href="/baitap3/DatabaseConnectUtil.php">Bài 2</a>
+    <a href="/baitap3/list.php">Bài 3</a>
+    <a href="/baitap3/login.php">Bài 4</a>
+    <a href="/baitap3/save.php">Bài 5</a>
 </body>
 </html>
