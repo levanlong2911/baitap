@@ -9,10 +9,10 @@
     
     // Port: 3306
     
-    $localhost = 'remotemysql.com';
-    $username = 'rMEt9axaDn';
-    $password = '70xIYdFRXw';
-    $database = 'rMEt9axaDn';
+    $localhost = "remotemysql.com";
+    $username = "rMEt9axaDn";
+    $password = "70xIYdFRXw";
+    $database = "rMEt9axaDn";
 
     $mysqli = new mysqli($localhost, $username, $password, $database);
     $mysqli -> set_charset('utf8');
