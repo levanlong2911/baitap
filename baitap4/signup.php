@@ -110,7 +110,8 @@
                         
                                 try {
                                     $mail->SMTPDebug = 2; //0,1,2: chế độ debug. khi chạy ngon thì chỉnh lại 0 nhé
-                                    $mail->isSMTP();
+                                    $mail->isSMTP();  
+                                    $mail->CharSet  = "utf-8";
                                     $mail->Host = 'smtp.gmail.com';  //SMTP servers (địa chỉ email server)
                                     $mail->SMTPAuth = true; // Enable authentication (cho phép kiểm tra usernam và password có đúng hay khống)
                                     $mail->Username = 'khanhvy1212.56@gmail.com'; // SMTP username
