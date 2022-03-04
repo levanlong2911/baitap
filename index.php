@@ -34,7 +34,6 @@
     <h2>bài tập 3 </h2>
     <a href="baitap3/index.php">Đăng nhập</a>
     <h2>bài tập 4 </h2>
-    <a href="/baitap/baitap4/signup.php">Đăng ký</a>
-    <a href="/baitap/baitap4/login.php">Đăng nhập</a>
+    <a href="baitap4/index.php">Đăng nhập</a>
 </body>
 </html>
