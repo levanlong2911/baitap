@@ -3,6 +3,8 @@
     include "PHPMailer-master/src/PHPMailer.php"; 
     include "PHPMailer-master/src/SMTP.php"; 
     include 'PHPMailer-master/src/Exception.php';
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
     ob_start();
 ?>
 <!DOCTYPE html>
@@ -103,11 +105,11 @@
                                 $kq = $mysqli->query($query);
                                 
                                 
-                                $mail = new PHPMailer\PHPMailer\PHPMailer(true);//true:enables exceptions
+                                $mail = new PHPMailer(true);//true:enables exceptions
                                 
                         
                                 try {
-                                    $mail->SMTPDebug = 2; //0,1,2: chế độ debug. khi chạy ngon thì chỉnh lại 0 nhé
+                                    $mail->SMTPDebug = 0; //0,1,2: chế độ debug. khi chạy ngon thì chỉnh lại 0 nhé
                                     $mail->isSMTP();  
                                     $mail->CharSet  = "utf-8";
                                     $mail->Host = 'smtp.gmail.com';  //SMTP servers (địa chỉ email server)
@@ -125,16 +127,16 @@
                                     
                                     $mail->Body = $noidungthu;
                                     // code chạy trên localhost khi đưa lên server thì xóa
-                                    $mail->smtpConnect( array(
-                                        "ssl" => array(
-                                            "verify_peer" => false,
-                                            "verify_peer_name" => false,
-                                            "allow_self_signed" => true
-                                        )
-                                    ));
+                                    // $mail->smtpConnect( array(
+                                    //     "ssl" => array(
+                                    //         "verify_peer" => false,
+                                    //         "verify_peer_name" => false,
+                                    //         "allow_self_signed" => true
+                                    //     )
+                                    // ));
                                     $mail->send();
                                     echo 'Đã gửi mail xong';
-                                } catch (Exception $e) {
+                                } catch (Exception $exception) {
                                     echo 'Mail không gửi được. Lỗi: ', $mail->ErrorInfo;
                                 }
                                 header('location: login.php?msg=Đăng ký tài khoản thành công');
