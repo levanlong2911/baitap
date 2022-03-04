@@ -125,13 +125,13 @@
                                     
                                     $mail->Body = $noidungthu;
                                     // code chạy trên localhost khi đưa lên server thì xóa
-                                    // $mail->smtpConnect( array(
-                                    //     "ssl" => array(
-                                    //         "verify_peer" => false,
-                                    //         "verify_peer_name" => false,
-                                    //         "allow_self_signed" => true
-                                    //     )
-                                    // ));
+                                    $mail->smtpConnect( array(
+                                        "ssl" => array(
+                                            "verify_peer" => false,
+                                            "verify_peer_name" => false,
+                                            "allow_self_signed" => true
+                                        )
+                                    ));
                                     $mail->send();
                                     echo 'Đã gửi mail xong';
                                 } catch (Exception $e) {
