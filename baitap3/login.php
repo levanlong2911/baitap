@@ -1,7 +1,7 @@
 <?php
     session_start();
     ob_start();
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/baitap/baitap3/DatabaseConnectUtil.php';
+    include 'DatabaseConnectUtil.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,9 +25,9 @@
             if(mysqli_num_rows($result) > 0){
                 $ar_user = mysqli_fetch_assoc($result);
                 // $_SESSION['ar_user'] = $ar_user;
-                header('location: save.php?msg=Đăng nhập thành công');
+                header('location: list.php?msg=Đăng nhập thành công');
             }else{
-                echo 'Sai tên đăng nhập hoặc password';
+                echo "<strong style='color:red'>Sai tên đăng nhập hoặc password</strong>";
             }
             $_SESSION['email'] = $email;
         }
@@ -63,6 +63,7 @@
             </p>
         </div>
         <button type="submit" name="submit">Đăng nhập</button>
+        <a href="dangky.php" style="text-decoration: none;">Tạo tài khoản</a>
     </form>
     
 </body>

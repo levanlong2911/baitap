@@ -31,6 +31,11 @@
     <a href="/bt2/bai8.php">Bài 8</a>
     <a href="/bt2/bai9.php">Bài 9</a>
     <a href="/bt2/bai10.php">Bài 10</a>
-    
+    <h2>bài tập 3 </h2>
+    <a href="/baitap/baitap3/dangky.php">Đăng ký</a>
+    <a href="/baitap/baitap3/login.php">Đăng nhập</a>
+    <h2>bài tập 4 </h2>
+    <a href="/baitap/baitap4/signup.php">Đăng ký</a>
+    <a href="/baitap/baitap4/login.php">Đăng nhập</a>
 </body>
 </html>

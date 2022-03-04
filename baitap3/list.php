@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/baitap/baitap3/DatabaseConnectUtil.php';
+    include 'DatabaseConnectUtil.php';
     session_start();
     ob_start();
     if(!isset($_SESSION['email'])){
@@ -17,7 +17,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/baitap/baitap3/DatabaseConnectUtil.ph
 <body>
     <?php
         if(isset($_GET['msg'])){
-            echo $_GET['msg'];
+            echo "<strong style='color:red'>{$_GET['msg']}</strong>";
         }
     ?>
     <?php
@@ -25,6 +25,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/baitap/baitap3/DatabaseConnectUtil.ph
     ?>
     <h3><?php echo'Tên đăng nhập của bạn là: ' . $_SESSION['email']; ?></h3>
     <?php } ?>
+    <a href="logout.php" style="text-decoration: none;">Đăng xuất</a>
     <h2>Danh sách thành viên</h2>
     <table class="table" border="1">
         <thead>

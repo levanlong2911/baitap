@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/baitap/baitap3/DatabaseConnectUtil.php';
+    include 'DatabaseConnectUtil.php';
     ob_start();
 ?>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
 <body>
     <?php
         if(isset($_GET['msg'])){
-            echo $_GET['msg'];
+            echo "<strong style='color:red'>{$_GET['msg']}</strong>";
         }
         if(isset($_POST['submit'])){
             $name = $_POST['name'];
@@ -83,6 +83,7 @@
             </p>
         </div>
         <button type="submit" name="submit">Đăng ký</button>
+        <a href="login.php" style="text-decoration: none;">Đăng nhập</a>
     </form>
     
 </body>
