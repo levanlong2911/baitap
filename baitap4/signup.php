@@ -89,7 +89,7 @@
                         if(isset($_POST['submit'])){
                             $email = mysqli_real_escape_string($mysqli, $_POST['email']);
                             $password = mysqli_real_escape_string($mysqli, $_POST['password']);
-                            $sql = "SELECT * FROM user WHERE email = '$email'";
+                            $sql = "SELECT * FROM users WHERE email = '$email'";
                             $result = $mysqli->query($sql);
                             // echo '<pre>';
                             //     print_r($result);
@@ -99,7 +99,7 @@
                                 header('location: signup.php?msg=Tài khoản đã tồn tại');
                             }else{
                                 $hashPass = password_hash($password, PASSWORD_BCRYPT);
-                                $query = "INSERT INTO user(email, password) values ('$email', '$hashPass')";
+                                $query = "INSERT INTO users(email, password) values ('$email', '$hashPass')";
                                 $kq = $mysqli->query($query);
                                 
                                 
@@ -107,7 +107,7 @@
                                 
                         
                                 try {
-                                    $mail->SMTPDebug = 2; //0,1,2: chế độ debug. khi chạy ngon thì chỉnh lại 0 nhé
+                                    $mail->SMTPDebug = 0; //0,1,2: chế độ debug. khi chạy ngon thì chỉnh lại 0 nhé
                                     $mail->isSMTP();  
                                     $mail->CharSet  = "utf-8";
                                     $mail->Host = 'smtp.gmail.com';  //SMTP servers (địa chỉ email server)
@@ -125,13 +125,13 @@
                                     
                                     $mail->Body = $noidungthu;
                                     // code chạy trên localhost khi đưa lên server thì xóa
-                                    $mail->smtpConnect( array(
-                                        "ssl" => array(
-                                            "verify_peer" => false,
-                                            "verify_peer_name" => false,
-                                            "allow_self_signed" => true
-                                        )
-                                    ));
+                                    // $mail->smtpConnect( array(
+                                    //     "ssl" => array(
+                                    //         "verify_peer" => false,
+                                    //         "verify_peer_name" => false,
+                                    //         "allow_self_signed" => true
+                                    //     )
+                                    // ));
                                     $mail->send();
                                     echo 'Đã gửi mail xong';
                                 } catch (Exception $e) {

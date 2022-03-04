@@ -24,7 +24,7 @@
                         if(isset($_POST['submit'])){
                             $email = mysqli_real_escape_string($mysqli ,$_POST['email']);
                             $password = mysqli_real_escape_string($mysqli ,$_POST['password']);
-                            $query = "SELECT * FROM user WHERE email ='$email'";
+                            $query = "SELECT * FROM users WHERE email ='$email'";
                             $result = $mysqli->query($query);
                             
                             if(mysqli_num_rows($result) > 0){
