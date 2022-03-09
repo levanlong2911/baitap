@@ -35,6 +35,23 @@
         function validate(){
             
             var flag = true;
+
+            // Kiểm tra name
+            var name = getValue('name');
+            if(name == ''){
+                flag = false;
+                showError('name', 'Vui lòng nhập họ và tên')
+            }else if(name.length() >= 6){
+                flag = false;
+                showError('name', 'Vui lòng nhập tên ít nhất 6 ký tự');
+            }else if(name.length() <= 32){
+                flag = false;
+                showError('name', 'Vui lòng nhập tên nhiều nhất 32 ký tự');
+            }else{
+                showError('name', '');
+            }
+
+
             // kiểm tra email
             var email = getValue('email');
             var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -89,9 +106,10 @@
                             echo "<strong style='color:red'>{$_GET['msg']}</strong>";
                         }
                         if(isset($_POST['submit'])){
+                            $name = mysqli_real_escape_string($mysqli, $_POST['name']);
                             $email = mysqli_real_escape_string($mysqli, $_POST['email']);
                             $password = mysqli_real_escape_string($mysqli, $_POST['password']);
-                            $sql = "SELECT * FROM users WHERE email = '$email'";
+                            $sql = "SELECT * FROM users WHERE name = '$name' OR email = '$email'";
                             $result = $mysqli->query($sql);
                             // echo '<pre>';
                             //     print_r($result);
@@ -101,7 +119,7 @@
                                 header('location: signup.php?msg=Tài khoản đã tồn tại');
                             }else{
                                 $hashPass = password_hash($password, PASSWORD_BCRYPT);
-                                $query = "INSERT INTO users(email, password) values ('$email', '$hashPass')";
+                                $query = "INSERT INTO users(name, email, password) values ('$name', '$email', '$hashPass')";
                                 $kq = $mysqli->query($query);
                                 
                                 
@@ -147,6 +165,11 @@
                         }
                     ?>
                     <h1 class="text-center text-uppercase h3 py-3">ĐĂNG KÝ TÀI KHOẢN</h1>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" class="form-control" placeholder="VD: Nguyễn Văn A">
+                        <span id="name_error"></span>
+                    </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="text" name="email" id="email" class="form-control" placeholder="1234@gmail.com">
