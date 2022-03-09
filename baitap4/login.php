@@ -31,7 +31,7 @@
                                 while($row = mysqli_fetch_array($result)){
                                     if(password_verify($password, $row['password'])){
                                         $_SESSION['email'] = $email;
-                                        header('location: list.php?msg=Đăng nhập thành công');
+                                        header('location: list.php');
                                     }
                                 }
                                 
