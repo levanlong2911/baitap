@@ -41,10 +41,10 @@
             if(name == ''){
                 flag = false;
                 showError('name', 'Vui lòng nhập họ và tên')
-            }else if(name.length() >= 6){
+            }else if(name.length <= 6){
                 flag = false;
                 showError('name', 'Vui lòng nhập tên ít nhất 6 ký tự');
-            }else if(name.length() <= 32){
+            }else if(name.length >= 32){
                 flag = false;
                 showError('name', 'Vui lòng nhập tên nhiều nhất 32 ký tự');
             }else{
