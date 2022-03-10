@@ -1,5 +1,5 @@
 <?php
-    include 'database.php';
+    include '../database.php';
     session_start();
     ob_start();
     if(!isset($_SESSION['email'])){
@@ -23,62 +23,16 @@
     // off set 
     $offset = ($current_page -1)*$row_count;
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-	<title>admin</title>
-
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
-
-
-    <!-- Bootstrap core CSS     -->
-    <link href="../baitap4/assets/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Animation library for notifications   -->
-    <link href="../baitap4/assets/css/animate.min.css" rel="stylesheet"/>
-
-    <!--  Paper Dashboard core CSS    -->
-    <link href="../baitap4/assets/css/paper-dashboard.css" rel="stylesheet"/>
-
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="../baitap4/assets/css/demo.css" rel="stylesheet" />
-
-
-    <!--  Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="../baitap4/assets/css/themify-icons.css" rel="stylesheet">
-
-</head>
-<body>
-    <div class="wrapper">
-        <div class="main-panel">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand">Trang quản trị viên</a>
-                    </div>
-                    <?php
-                        if(isset($_SESSION['email'])){
-                        
-                    ?>
-                    <div class="nav navbar-nav navbar-right" >
-                        Xin chào, <b><?php echo $_SESSION['email']; ?></b> &nbsp;<a href="../baitap4/logout.php" class="btn btn-danger square-btn-adjust">Đăng xuất</a>
-                    </div>
-                    <?php } ?>
-                </div>
-            </nav>
+<?php
+    include '../inc/header.php';
+?>
             <div class="content-home">
                 <h3>Quản lý người dùng</h3>
-                <form action="list.php" method="post">
+                <form action="" method="post">
                     <?php
+                        if(isset($_GET['msg'])){
+                            echo "<strong style='color:red'>{$_GET['msg']}</strong>" . '<br/>';
+                        }
                         if(isset($_POST['submit']) && $_POST['submit']){
                             $name = $_POST['name'];
                         }else{
@@ -114,9 +68,9 @@
                         <td><?php echo $name; ?></td>
                         <td><?php echo $email; ?></td>
                         <td>
-                            <a href="" title="" class="btn btn-primary"><i class="fa fa-edit "></i> Sửa</a>
+                            <a href="edit.php?id=<?php echo $id; ?>" title="" class="btn btn-primary"><i class="fa fa-edit "></i> Sửa</a>
                             
-                            <a href="" title="" class="btn btn-danger"><i class="fa fa-pencil"></i> Xóa</a>
+                            <a href="del.php?id=<?php echo $id; ?>" title="" class="btn btn-danger"><i class="fa fa-pencil"></i> Xóa</a>
                             
                         </td>
                         </tr>
@@ -170,37 +124,10 @@
             </div>
         </div>
         <!-- left-bar -->
-        <div class="sidebar" data-background-color="white" data-active-color="danger">
-        <div class="sidebar-wrapper">
-            <div class="logo">
-                <h3>Bài tập</h3>
-            </div>
-            <ul class="nav">
-                
-                <li>
-                    <a href="">
-                        <p>Quản lý người dùng</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    </div>
+        <?php
+            include '../inc/left-bar.php';
+        ?>
     <!-- footer -->
-</body>
-
-    <!--   Core JS Files   -->
-    <script src="../baitap4/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="../baitap4/assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-	<script src="../baitap4/assets/js/paper-dashboard.js"></script>
-
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="../baitap4/assets/js/demo.js"></script>
-
-
-</html>
-<?php
-    ob_end_flush();
-?>
+    <?php
+        include '../inc/footer.php';
+    ?>
