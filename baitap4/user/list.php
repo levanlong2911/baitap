@@ -85,8 +85,9 @@
                     <li class="page-item">
                         <?php
                             if($current_page > 1 && $tongST > 1){
+                                $previous_page = $current_page - 1;
                         ?>
-                        <a class="page-link" href="list.php?page=<?php echo $current_page; ?>-1" aria-label="Previous">
+                        <a class="page-link" href="list.php?page=<?php echo $previous_page; ?>" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                         </a>
@@ -111,9 +112,10 @@
                     ?>
                     <li class="page-item">
                         <?php
-                            if($current_page < 1 && $tongST < 1){
+                            if($current_page < $tongST && $tongST < 1){
+                                $next_page = $current_page + 1;
                         ?>
-                        <a class="page-link" href="list.php?page=<?php echo $current_page; ?>+1" aria-label="Next">
+                        <a class="page-link" href="list.php?page=<?php echo $next_page; ?>" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                         </a>
