@@ -67,7 +67,8 @@
                                 $token = bin2hex(random_bytes(12));
                                 // $hash_token = password_hash($token, PASSWORD_BCRYPT);
                                 
-                                $url = "http://localhost/baitap/baitap4/resert-password.php?token=$token";
+                                // $url = "http://localhost/baitap/baitap4/resert-password.php?token=$token";
+                                $url = "https://bai-tap-new.herokuapp.com/baitap4/resert-password.php?token=$token";
                                 $expires = date('U') + 86400; // thời gian token sống trong vòng 1 ngày
                                 $sql = "INSERT INTO tokenpass(token_email, token_hash, token_expires) VALUES ('$email', '$token', '$expires')";
                                 $kq = $mysqli->query($sql);
