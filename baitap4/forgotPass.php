@@ -62,8 +62,12 @@
                             $result = $mysqli->query($query);
                             // Kiểm tra email nếu có thì gửi email
                             if(mysqli_num_rows($result) > 0){
-                                $token  = bin2hex(random_bytes(12));
-                                $url = "http://localhost/baitap/baitap4/resert-password?token='.$token.'";
+                                // $token  = random_bytes(12);
+                                // bin2hex chuyển đổi từ chuỗi nhị phân sang thập lục phân.
+                                $token = bin2hex(random_bytes(12));
+                                // $hash_token = password_hash($token, PASSWORD_BCRYPT);
+                                
+                                $url = "http://localhost/baitap/baitap4/resert-password.php?token=$token";
                                 $expires = date('U') + 86400; // thời gian token sống trong vòng 1 ngày
                                 $sql = "INSERT INTO tokenpass(token_email, token_hash, token_expires) VALUES ('$email', '$token', '$expires')";
                                 $kq = $mysqli->query($sql);
@@ -83,7 +87,7 @@
                                     $mail->isHTML(true);  // Set email format to HTML
                                     $mail->Subject = 'Thay đổi mật khẩu';
                                     // $noidungthu = '<p>Nội dung</p>'; 
-                                    $noidungthu = "<p>Vui lòng nhấn vào đường dẫn phía dưới</p>"; 
+                                    $noidungthu = "<p>Vui lòng nhấn vào đường link phía dưới để thay đổi mật khẩu trong vòng 24h, sau thời gian này link sẻ không có giá trị</p>"; 
                                     $noidungthu .= "<p>Link: $url</p>"; 
                                     
                                     $mail->Body = $noidungthu;

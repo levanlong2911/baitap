@@ -1,10 +1,5 @@
 <?php
     include 'database.php';
-    include 'PHPMailer-master/src/PHPMailer.php'; 
-    include 'PHPMailer-master/src/SMTP.php'; 
-    include 'PHPMailer-master/src/Exception.php';
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
     ob_start();
 ?>
 <!DOCTYPE html>
@@ -73,30 +68,40 @@
             <div class="row justify-content-center my-5 form-signup">
                 <form action="" method="post" class="col-md-6 bg-light p-3" onsubmit="return validate()">
                     <?php
-                        if(isset($_GET['msg'])){
-                            echo "<strong style='color:red'>{$_GET['msg']}</strong>";
-                        }
-                        if(isset($_POST['submit'])){
-                            $password = mysqli_real_escape_string($mysqli, $_POST['password']);
-                            $sql = "SELECT * FROM users WHERE name = '$name' OR email = '$email'";
-                            $result = $mysqli->query($sql);
-                            // echo '<pre>';
-                            //     print_r($result);
-                            // echo '</pre>';
-                            // die();
-                            if(mysqli_num_rows($result) > 0){
-                                header('location: signup.php?msg=Tài khoản đã tồn tại');
-                            }else{
-                                $hashPass = password_hash($password, PASSWORD_BCRYPT);
-                                $kq = $mysqli->query($query);
-                                header('location: login.php?msg=Đăng ký tài khoản thành công');
-                            }
-                                
-                                
+                        if(isset($_GET['token'])){
+                            $token = $_GET['token'];
                             
+                            // echo $email;
+                            // die();
                         }
+                        $currentDate = date('U');
+                        $sql = "SELECT * FROM tokenpass WHERE token_hash = '$token'";
+                        $kq = $mysqli->query($sql);
+                        $row = mysqli_fetch_array($kq);
+                        $email = $row['token_email'];
+                        $token_expires = $row['token_expires'];
+                        if($token_expires >= $currentDate){
+                            if(isset($_POST['submit'])){
+                                $token_reset = $_POST['token'];
+                                $email_reset = mysqli_real_escape_string($mysqli, $_POST['email']);
+                                $password_reset = mysqli_real_escape_string($mysqli, $_POST['password']);
+                                $pass_hash = password_hash($password_reset, PASSWORD_BCRYPT);
+                                $query = "UPDATE users SET password = '$pass_hash' WHERE email = '$email_reset'";
+                                $result = $mysqli->query($query);
+                                if($result){
+                                    echo '<strong style="color:red">Đổi mật khẩu thành công</strong>';
+                                }else{
+                                    echo '<strong style="color:red">Đã có lổi khi đổi mật khẩu</strong>';
+                                }
+                            }
+                        }else{
+                            echo '<strong style="color:red">Yêu cầu đặt lại mật khẩu của bạn đã hết hạn, vui lòng gửi lại yêu cầu</strong>';
+                        }
+                        
                     ?>
                     <h1 class="text-center text-uppercase h3 py-3">THAY ĐỔI MẬT KHẨU</h1>
+                    <input type="hidden" name="token" value="<?php echo $token; ?>">
+                    <input type="hidden" name="email" value="<?php echo $email; ?>">
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" id="password" class="form-control" placeholder="VD: Nguyenvanan11@">
@@ -109,6 +114,8 @@
                     </div>
                     <!-- <button type="submit" name="submit" onclick="validate();" >Đăng ký</button> -->
                     <input type="submit" name="submit" class="btn btn-primary btn-block" value="Đổi mật khẩu">
+                    <a href="signup.php" style="text-decoration: none;" class="row justify-content-center">Tạo tài khoản</a>
+                    <a href="login.php" style="text-decoration: none;" class="row justify-content-center">Đăng nhập</a>
                 </form>
                 
             </div>

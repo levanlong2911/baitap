@@ -3,7 +3,7 @@
     session_start();
     ob_start();
     if(!isset($_SESSION['email'])){
-        header('location: login.php');
+        header('location: ../login.php');
     }
     define('ROW_COUNT', 10);
     // phân trang

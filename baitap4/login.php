@@ -2,6 +2,10 @@
     session_start();
     ob_start();
     include 'database.php';
+    if(isset($_COOKIE['email']) && isset($_COOKIE['password'])){
+        $ck_email = $_COOKIE['email'];
+        $ck_password = $_COOKIE['password'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +55,7 @@
                 showError('password', 'Vui lòng nhập mật khẩu');
             }else if(!passformat.test(password)){
                 flag = false;
-                showError('password', 'Vui lòng nhập mật khẩu tối thiểu tám và tối đa 20 ký tự, ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt.');
+                showError('password', 'Vui lòng nhập mật khẩu tối thiểu 8 và tối đa 20 ký tự, ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt.');
             }else{
                 showError('password', '');
             }
@@ -79,26 +83,33 @@
                                 while($row = mysqli_fetch_array($result)){
                                     if(password_verify($password, $row['password'])){
                                         $_SESSION['email'] = $email;
+                                        if(isset($_POST['ghinho']) && ($_POST['ghinho'])){
+                                            setcookie('email', $email, time() + (86400*30));
+                                            setcookie('password', $password, time() + (86400*30));
+                                        }
                                         header('location: ./user/list.php');
                                     }else{
                                         echo '<strong style="color:red">Email hoặc password nhập sai</strong>';
                                     }
                                 }
-                                
+                            }else{
+                                echo '<strong style="color:red">Tài khoản không tồn tại, vui lòng đăng ký để tiếp tục đăng nhập</strong>';
                             }
+                            
                         }
                     ?>
                     <h1 class="text-center text-uppercase h3 py-3">ĐĂNG NHẬP</h1>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" name="email" id="email" class="form-control" placeholder="1234@gmail.com">
+                        <input type="text" name="email" id="email" class="form-control" placeholder="1234@gmail.com" value="<?php if(isset($ck_email)) echo $ck_email;?>">
                         <span id="email_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="VD: Nguyenvanan11@">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="VD: Nguyenvanan11@" value="<?php if(isset($ck_password)) echo $ck_password;?>">
                         <span id="password_error"></span>
                     </div>
+                    <input type="checkbox" name="ghinho"> Ghi nhớ tài khoản?
                     <input type="submit" name="submit" class="btn btn-primary btn-block" value="Đăng nhập">
                     <a href="signup.php" style="text-decoration: none;" class="row justify-content-center">Tạo tài khoản</a>
                     <a href="forgotPass.php" style="text-decoration: none;" class="row justify-content-center">Quên mật khẩu</a>
