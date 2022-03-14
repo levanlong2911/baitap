@@ -106,9 +106,9 @@
                             echo "<strong style='color:red'>{$_GET['msg']}</strong>";
                         }
                         if(isset($_POST['submit'])){
-                            $name = mysqli_real_escape_string($mysqli, $_POST['name']);
-                            $email = mysqli_real_escape_string($mysqli, $_POST['email']);
-                            $password = mysqli_real_escape_string($mysqli, $_POST['password']);
+                            $name = htmlspecialchars(mysqli_real_escape_string($mysqli, $_POST['name']));
+                            $email = htmlspecialchars(mysqli_real_escape_string($mysqli, $_POST['email']));
+                            $password = htmlspecialchars(mysqli_real_escape_string($mysqli, $_POST['password']));
                             $sql = "SELECT * FROM users WHERE name = '$name' OR email = '$email'";
                             $result = $mysqli->query($sql);
                             // echo '<pre>';

@@ -74,8 +74,8 @@
                         //     echo "<strong style='color:red'>{$_GET['msg']}</strong>";
                         // }
                         if(isset($_POST['submit'])){
-                            $email = mysqli_real_escape_string($mysqli ,$_POST['email']);
-                            $password = mysqli_real_escape_string($mysqli ,$_POST['password']);
+                            $email = htmlspecialchars(mysqli_real_escape_string($mysqli ,$_POST['email']));
+                            $password = htmlspecialchars(mysqli_real_escape_string($mysqli ,$_POST['password']));
                             $query = "SELECT * FROM users WHERE email ='$email'";
                             $result = $mysqli->query($query);
                             

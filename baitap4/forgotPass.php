@@ -57,7 +57,7 @@
                         //     echo "<strong style='color:red'>{$_GET['msg']}</strong>";
                         // }
                         if(isset($_POST['submit'])){
-                            $email = mysqli_real_escape_string($mysqli ,$_POST['email']);   
+                            $email = htmlspecialchars(mysqli_real_escape_string($mysqli ,$_POST['email']));   
                             $query = "SELECT * FROM users WHERE email ='$email'";
                             $result = $mysqli->query($query);
                             // Kiểm tra email nếu có thì gửi email

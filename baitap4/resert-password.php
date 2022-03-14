@@ -83,8 +83,8 @@
                         if($token_expires >= $currentDate){
                             if(isset($_POST['submit'])){
                                 $token_reset = $_POST['token'];
-                                $email_reset = mysqli_real_escape_string($mysqli, $_POST['email']);
-                                $password_reset = mysqli_real_escape_string($mysqli, $_POST['password']);
+                                $email_reset = htmlspecialchars(mysqli_real_escape_string($mysqli, $_POST['email']));
+                                $password_reset = htmlspecialchars(mysqli_real_escape_string($mysqli, $_POST['password']));
                                 $pass_hash = password_hash($password_reset, PASSWORD_BCRYPT);
                                 $query = "UPDATE users SET password = '$pass_hash' WHERE email = '$email_reset'";
                                 $result = $mysqli->query($query);
