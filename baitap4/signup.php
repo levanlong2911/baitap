@@ -127,13 +127,13 @@
                                 
                         
                                 try {
-                                    $mail->SMTPDebug = 2; //0,1,2: chế độ debug. khi chạy ngon thì chỉnh lại 0 nhé
+                                    $mail->SMTPDebug = 0; //0,1,2: chế độ debug. khi chạy ngon thì chỉnh lại 0 nhé
                                     $mail->isSMTP();  
                                     $mail->CharSet  = "utf-8";
                                     $mail->Host = 'smtp.gmail.com';  //SMTP servers (địa chỉ email server)
                                     $mail->SMTPAuth = true; // Enable authentication (cho phép kiểm tra usernam và password có đúng hay khống)
                                     $mail->Username = 'khanhvy1212.56@gmail.com'; // SMTP username
-                                    $mail->Password = 'vanlong5656';   // SMTP password
+                                    $mail->Password = 'xyvkdzafimvmrnwr';   // SMTP password
                                     $mail->SMTPSecure = 'ssl';  // encryption TLS/SSL (thư được mã hóa dưới 2 dạng TLS/SSL)
                                     $mail->Port = 465;  // port to connect to      (port TLS/587 còn SSL/465)          
                                     $mail->setFrom('khanhvy1212.56@gmail.com', 'admin' ); 
