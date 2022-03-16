@@ -67,10 +67,10 @@
                         <th scope="row"><?php echo $id; ?></th>
                         <td><?php echo $name; ?></td>
                         <td><?php echo $email; ?></td>
-                        <td>
+                        <td id="del<?php echo $id; ?>">
                             <a href="edit.php?id=<?php echo $id; ?>" title="" class="btn btn-primary"><i class="fa fa-edit "></i> Sửa</a>
                             
-                            <a href="del.php?id=<?php echo $id; ?>" title="" class="btn btn-danger"><i class="fa fa-pencil"></i> Xóa</a>
+                            <a href="" title="" onclick="delUser(<?php echo $id; ?>)" class="btn btn-danger"><i class="fa fa-pencil"></i> Xóa</a>
                             
                         </td>
                         </tr>
@@ -124,6 +124,20 @@
                     </ul>
                 </nav>
             </div>
+            <script type="text/javascript">
+                function delUser(id){
+                    if(confirm('Bạn có chắc chắn muốn xóa không?')){
+                        $.ajax({
+                            type: "POST",
+                            url: "del.php",
+                            data: {del_id:id},
+                            success: function(data){
+                                $('#del' + id).hide();
+                            }
+                        });
+                    }
+                }
+            </script>
         </div>
         <!-- left-bar -->
         <?php

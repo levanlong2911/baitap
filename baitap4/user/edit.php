@@ -14,7 +14,11 @@
                 <div class="row">
                     <div class="col-md-4">
                         <?php
-                            $id = $_GET['id'];
+                            if(isset($_GET['id'])){
+                                // ép kiểu về string và int để phòng chống sql injection
+                                $id = (string)(int)$_GET['id'];
+                            }
+                            
                             $sql = "SELECT * FROM users where id = '$id'";
                             $kq = $mysqli->query($sql);
                             $ar_users = mysqli_fetch_assoc($kq);
@@ -22,14 +26,23 @@
                                 $name = htmlspecialchars(mysqli_real_escape_string($mysqli, $_POST['name']));
                                 $email = mysqli_real_escape_string($mysqli, $_POST['email']);
                                 $password = htmlspecialchars(mysqli_real_escape_string($mysqli, $_POST['password']));
-                                
-                                $pass_hash = password_hash($password, PASSWORD_BCRYPT);
-                                $sql2 = "UPDATE users SET name = '$name', password = '$pass_hash' where id = $id ";
-                                $kq2 = $mysqli->query($sql2);
-                                if($kq2){
-                                    header('location: list.php?msg=Sửa thành công');
+                                if($password == ''){
+                                    $sql2 = "UPDATE users SET name = '$name' where id = $id ";
+                                    $kq2 = $mysqli->query($sql2);
+                                    if($kq2){
+                                        header('location: list.php?msg=Sửa thành công');
+                                    }else{
+                                        echo '<strong style="color:red">Đã có lổi khi sửa</strong>';
+                                    }
                                 }else{
-                                    echo '<strong style="color:red">Đã có lổi khi sửa</strong>';
+                                    $pass_hash = password_hash($password, PASSWORD_BCRYPT);
+                                    $sql3 = "UPDATE users SET name = '$name', password = '$pass_hash' where id = $id ";
+                                    $kq3 = $mysqli->query($sql3);
+                                    if($kq3){
+                                        header('location: list.php?msg=Sửa thành công');
+                                    }else{
+                                        echo '<strong style="color:red">Đã có lổi khi sửa</strong>';
+                                    }
                                 }
                                 
                             }
@@ -89,23 +102,20 @@
                                 var password = getValue('password');
                                 
                                 // Tối thiểu tám và tối đa 20 ký tự, ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt:
-                                var passformat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
-                                if(password == ''){
-                                    flag = false;
-                                    showError('password', 'Vui lòng nhập mật khẩu');
-                                }else if(!passformat.test(password)){
-                                    flag = false;
-                                    showError('password', 'Vui lòng nhập mật khẩu tối thiểu tám và tối đa 20 ký tự, ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt.');
-                                }else{
-                                    showError('password', '');
-                                }
+                                // var passformat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+                                // if(password == ''){
+                                //     flag = false;
+                                //     showError('password', 'Vui lòng nhập mật khẩu');
+                                // }else if(!passformat.test(password)){
+                                //     flag = false;
+                                //     showError('password', 'Vui lòng nhập mật khẩu tối thiểu tám và tối đa 20 ký tự, ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt.');
+                                // }else{
+                                //     showError('password', '');
+                                // }
 
                                 // Kiểm tra xác nhận mật khẩu
                                 var passwordconfirm = getValue('passwordconfirm');
-                                if(passwordconfirm == ''){
-                                    flag = false;
-                                    showError('passwordconfirm', 'Vui lòng nhập lại mật khẩu');
-                                }else if(passwordconfirm != password){
+                                if(passwordconfirm != password){
                                     flag = false;
                                     showError('passwordconfirm', 'Mật khẩu không khớp');
                                 }else{
