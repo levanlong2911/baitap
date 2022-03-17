@@ -102,16 +102,19 @@
                                 var password = getValue('password');
                                 
                                 // Tối thiểu tám và tối đa 20 ký tự, ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt:
-                                // var passformat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+                                var passformat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
                                 // if(password == ''){
-                                //     flag = false;
+                                //     // flag = false;
                                 //     showError('password', 'Vui lòng nhập mật khẩu');
-                                // }else if(!passformat.test(password)){
-                                //     flag = false;
-                                //     showError('password', 'Vui lòng nhập mật khẩu tối thiểu tám và tối đa 20 ký tự, ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt.');
-                                // }else{
-                                //     showError('password', '');
-                                // }
+                                // }else
+                                if(password != ''){
+                                    if(!passformat.test(password)){
+                                       // flag = false;
+                                       showError('password', 'Vui lòng nhập mật khẩu tối thiểu tám và tối đa 20 ký tự, ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt.');
+                                    }else{
+                                        showError('password', '');
+                                    }
+                                }
 
                                 // Kiểm tra xác nhận mật khẩu
                                 var passwordconfirm = getValue('passwordconfirm');

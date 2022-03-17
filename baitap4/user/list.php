@@ -55,7 +55,7 @@
                     <tbody>
                         <?php
                             
-                            $sql = "SELECT * FROM users WHERE name like '%$name%' OR email like '%$name%' limit $offset, $row_count";
+                            $sql = "SELECT * FROM users WHERE name like '%".$name."%' OR email like '%".$name."%' limit $offset, $row_count";
                             $kq = $mysqli->query($sql);
                             while($ar_users = mysqli_fetch_assoc($kq)){
                                 $id = $ar_users['id'];
