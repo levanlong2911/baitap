@@ -34,7 +34,7 @@
                             echo "<strong style='color:red'>{$_GET['msg']}</strong>" . '<br/>';
                         }
                         if(isset($_POST['submit']) && $_POST['submit']){
-                            $name = $_POST['name'];
+                            $name = htmlspecialchars(mysqli_real_escape_string($mysqli ,$_POST['name']));
                         }else{
                             $name = '';
                         }
